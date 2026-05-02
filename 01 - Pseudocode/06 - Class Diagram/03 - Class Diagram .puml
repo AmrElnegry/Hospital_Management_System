@@ -1,0 +1,120 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class Person {
+  -name : string
+  -phone : string
+  +SetName(value : string) : void
+  +SetPhone(value : string) : void
+  +GetName() : string
+  +GetPhone() : string
+}
+
+class Patient {
+  +PatientID : string
+  +Age : int
+  +Gender : string
+  +Password : string
+  +CreatePatient(id, name, age, gender, phone, password) : void
+}
+
+class Doctor {
+  +DoctorID : string
+  +Username : string
+  +Specialty : string
+  +Password : string
+  +Age : int
+  +ExperienceYears : int
+  +CertificationsCount : int
+  +CreateDoctor(id, username, name, specialty, phone, password, age, experience, certifications) : void
+}
+
+class Appointment {
+  +AppointmentID : string
+  +PatientID : string
+  +DoctorID : string
+  +AppointmentDate : DateTime
+  +Status : AppointmentStatus
+  +Diagnosis : string
+  +CreateAppointment(id, patientID, doctorID, appointmentDate, status, diagnosis) : void
+}
+
+enum AppointmentStatus {
+  Pending
+  Completed
+  Cancelled
+}
+
+class DB <<static>> {
+  +Doctors : Doctor[]
+  +Patients : Patient[]
+  +Appointments : Appointment[]
+  +DoctorCount : int
+  +PatientCount : int
+  +AppointmentCount : int
+  +AdminPassword : string
+  +GenerateMixedID() : string
+  +Save() : void
+  +Load() : void
+}
+
+class ValidationHelper <<static>>
+
+class MainForm
+class StaffLoginForm
+class AdminLoginForm
+class DoctorLoginForm
+class PatientLoginForm
+class PatientRecoverForm
+class PatientRegistrationForm
+class BookingEntryForm
+class SpecialtySelectionForm
+class DoctorSelectionForm
+class AppointmentDateTimeForm
+class BookingConfirmationForm
+class AdminForm
+class DoctorEditForm
+class DoctorForm
+class PatientDashboardForm
+class PatientAccountForm
+
+Person <|-- Patient
+Person <|-- Doctor
+Appointment --> AppointmentStatus
+DB --> Doctor
+DB --> Patient
+DB --> Appointment
+
+MainForm --> BookingEntryForm
+MainForm --> PatientLoginForm
+MainForm --> StaffLoginForm
+StaffLoginForm --> AdminLoginForm
+StaffLoginForm --> DoctorLoginForm
+AdminLoginForm --> AdminForm
+DoctorLoginForm --> DoctorForm
+PatientLoginForm --> PatientDashboardForm
+PatientLoginForm --> PatientRecoverForm
+BookingEntryForm --> PatientRegistrationForm
+BookingEntryForm --> SpecialtySelectionForm
+SpecialtySelectionForm --> DoctorSelectionForm
+DoctorSelectionForm --> AppointmentDateTimeForm
+AppointmentDateTimeForm --> BookingConfirmationForm
+PatientDashboardForm --> PatientAccountForm
+
+PatientRegistrationForm ..> DB
+BookingEntryForm ..> DB
+SpecialtySelectionForm ..> DB
+DoctorSelectionForm ..> DB
+AppointmentDateTimeForm ..> DB
+AdminForm ..> DB
+DoctorForm ..> DB
+PatientDashboardForm ..> DB
+PatientAccountForm ..> DB
+
+PatientRegistrationForm ..> ValidationHelper
+PatientLoginForm ..> ValidationHelper
+PatientRecoverForm ..> ValidationHelper
+AdminForm ..> ValidationHelper
+DoctorEditForm ..> ValidationHelper
+
+@enduml

@@ -1,0 +1,71 @@
+🧩 CORE CLASSES
+
+Class: Patient
+
+* CreatePatient()
+  إنشاء مريض جديد وتسجيل بياناته داخل النظام.
+
+* GeneratePatientID()
+  توليد رقم تعريفي فريد لكل مريض.
+
+* GetPatientData()
+  استرجاع بيانات المريض لاستخدامها في العرض أو العمليات.
+
+Class: Doctor
+
+* CreateDoctor()
+  إضافة دكتور جديد ببياناته (اسم، تخصص، مواعيد…).
+
+* GenerateDoctorID()
+  إنشاء ID فريد لكل دكتور.
+
+* GetDoctorData()
+  جلب بيانات الدكتور.
+
+* GetDoctorSchedule()
+  عرض جدول المواعيد الخاصة بالدكتور.
+
+* ValidateDoctorCredentials()
+  التحقق من بيانات تسجيل دخول الدكتور.
+
+Class: Appointment
+
+* CreateAppointment()
+  إنشاء موعد جديد بين مريض ودكتور.
+
+* GenerateAppointmentID()
+  توليد رقم تعريفي فريد لكل موعد.
+
+* LinkPatientToDoctor()
+  ربط المريض بالدكتور داخل الموعد.
+
+* SetAppointmentStatus()
+  تحديد حالة الموعد (Pending / Completed / Cancelled).
+
+* AddDiagnosis()
+  إضافة التشخيص المرتبط بالموعد.
+
+* GetAppointmentData()
+  استرجاع بيانات الموعد.
+
+
+🏠 HOME PAGE
+
+* DisplayHomePage()
+  عرض الواجهة الرئيسية للنظام.
+
+* DisplayStatistics()
+  عرض إحصائيات سريعة (عدد الأطباء، المواعيد…).
+
+* RefreshStatistics()
+  تحديث الإحصائيات بعد أي تغيير.
+
+* NavigateToPatientPage()
+  الانتقال لواجهة المريض.
+
+* NavigateToDoctorLogin()
+  الانتقال لصفحة الدكتور.
+
+* NavigateToAdminLogin()
+  الانتقال لصفحة الأدمن.
+

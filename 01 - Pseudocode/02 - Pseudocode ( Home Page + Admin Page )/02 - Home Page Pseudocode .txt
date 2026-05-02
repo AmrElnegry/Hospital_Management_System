@@ -1,0 +1,84 @@
+Function HomeScreenFlow()
+
+    Begin
+        Call DisplayHomePage()
+
+        While True
+
+            Input userChoice
+
+            If userChoice == 1 Then
+                Call NavigateToPatientPage()
+                Exit Loop
+            End If
+
+            If userChoice == 2 Then
+                Call NavigateToDoctorLogin()
+                Exit Loop
+            End If
+
+            If userChoice == 3 Then
+                Call NavigateToAdminLogin()
+
+                Set username = EnterAdminUsername()
+                Set password = EnterAdminPassword()
+
+                Call ValidateAdminLogin(username, password)
+
+                Exit Loop
+            End If
+
+            Display "Invalid Choice"
+
+        End While
+    End
+
+
+Function DisplayHomePage()
+
+    Begin
+        Display "Welcome to Hospital System"
+
+        Call DisplayStatistics()
+
+        Display "1. Patient Page"
+        Display "2. Doctor Login"
+        Display "3. Admin Login"
+    End
+
+
+Function DisplayStatistics()
+
+    Begin
+        Set doctorsCount = CountDoctors()
+        Set appointmentsCount = CountAppointments()
+        Set specialtiesCount = CountSpecialties()
+
+        Display "Doctors: " + doctorsCount
+        Display "Appointments: " + appointmentsCount
+        Display "Specialties: " + specialtiesCount
+    End
+
+
+Function NavigateToPatientPage()
+
+    Begin
+        Open PatientPage
+        Close HomePage
+    End
+
+
+Function NavigateToDoctorLogin()
+
+    Begin
+        Open DoctorLoginPage
+        Close HomePage
+    End
+
+
+Function NavigateToAdminLogin()
+
+    Begin
+        Open AdminLoginPage
+        Close HomePage
+    End

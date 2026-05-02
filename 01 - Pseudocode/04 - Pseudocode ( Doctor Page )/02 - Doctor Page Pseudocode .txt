@@ -1,0 +1,130 @@
+Function DoctorSystemFlow()
+
+    Begin
+        // ===== Login Flow =====
+
+        Set username = EnterUsername()
+        Set password = EnterPassword()
+
+        Set isValid = CheckDoctorCredentials(username, password)
+
+        If isValid == False Then
+            Call ShowLoginError()
+            Exit Function
+        End If
+
+        Set currentDoctor = LoadDoctorData(username)
+
+        Call NavigateToDoctorPage()
+
+
+        // ===== Doctor Main Loop =====
+
+        While True
+
+            Display "1. View Appointments"
+            Display "2. Sort Appointments"
+            Display "3. Filter Appointments"
+            Display "4. Refresh Appointments"
+            Display "5. Search Patient"
+            Display "6. Add Diagnosis"
+            Display "7. Complete Appointment"
+            Display "8. Cancel Appointment"
+            Display "9. Logout"
+
+            Input choice
+
+
+            // ===== Load Appointments =====
+            Set appointmentsList = ViewAppointments(currentDoctor)
+
+
+            If choice == 1 Then
+                For each appointment in appointmentsList
+                    Set data = appointment.GetAppointmentData()
+                    Display data
+                End For
+            End If
+
+
+            If choice == 2 Then
+                Set sorted = SortAppointmentsByTime(appointmentsList)
+
+                For each appointment in sorted
+                    Set data = appointment.GetAppointmentData()
+                    Display data
+                End For
+            End If
+
+
+            If choice == 3 Then
+                Input status
+                Set filtered = FilterAppointmentsByStatus(appointmentsList, status)
+
+                For each appointment in filtered
+                    Set data = appointment.GetAppointmentData()
+                    Display data
+                End For
+            End If
+
+
+            If choice == 4 Then
+                Set appointmentsList = RefreshAppointments(currentDoctor)
+                Display "Appointments Refreshed"
+            End If
+
+
+            If choice == 5 Then
+                Input patientID
+                Set result = SearchPatient(patientID)
+
+                If result == "Patient Not Found" Then
+                    Display result
+                Else
+                    Call DisplayPatientDetails(result)
+                End If
+            End If
+
+
+            If choice == 6 Then
+                Input appointmentID
+                Input diagnosisText
+
+                For each appointment in appointmentsList
+                    If appointment.appointmentID == appointmentID Then
+                        Call AddDiagnosis(appointment, diagnosisText)
+                    End If
+                End For
+            End If
+
+
+            If choice == 7 Then
+                Input appointmentID
+
+                For each appointment in appointmentsList
+                    If appointment.appointmentID == appointmentID Then
+                        Call CompleteAppointment(appointment)
+                    End If
+                End For
+            End If
+
+
+            If choice == 8 Then
+                Input appointmentID
+
+                For each appointment in appointmentsList
+                    If appointment.appointmentID == appointmentID Then
+                        Call CancelAppointment(appointment)
+                    End If
+                End For
+            End If
+
+
+            If choice == 9 Then
+                Call Logout()
+                Exit Loop
+            End If
+
+        End While
+
+    End

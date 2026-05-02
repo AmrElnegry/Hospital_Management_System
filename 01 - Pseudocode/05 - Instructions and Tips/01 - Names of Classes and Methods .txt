@@ -1,0 +1,61 @@
+🔹 أولًا: أسماء الـ Classes
+
+Patient
+Doctor
+Appointment
+Admin (اختياري لو احتجناه)
+
+
+
+🔹 ثانيًا: أسماء المتغيرات الأساسية
+
+patientID
+doctorID
+appointmentID
+patientName
+doctorName
+age
+gender
+phone
+specialty
+diagnosis
+timeSlot
+status
+
+
+
+🔹 ثالثًا: Status (مهم جدًا يكون موحد)
+
+Pending
+Completed
+
+
+
+🔹 رابعًا: أسماء الـ Functions (Methods)
+
+👤 Patient Page:
+CreatePatient()
+GeneratePatientID()
+SearchPatient()
+DisplayPatientData()
+BookAppointment()
+
+🧑‍⚕️ Doctor Page:
+ViewAppointments()
+SearchPatient()
+AddDiagnosis()
+CompleteAppointment()
+CancelAppointment()
+
+🛠️ Admin Page:
+ViewAllAppointments()
+FilterAppointments()
+AddDoctor()
+EditDoctor()
+DeleteDoctor()
+
+🔗 System Functions:
+GetDoctorsBySpecialty()
+GetAvailableTimeSlots()
+SaveData()
+LoadData()

@@ -1,0 +1,87 @@
+🔁 System Function Names :
+
+01.   SaveDataToFile()
+02.   LoadDataFromFile()
+03.   ValidateInput()
+04.   CheckAvailableTime()
+
+
+
+🔁 System Function Pseudocode :
+
+01.
+
+Function SaveDataToFile(fileName, data)
+
+    Begin
+        Open file fileName in append mode
+
+        Write data to file
+
+        Close file
+    End
+
+
+02.
+
+Function LoadDataFromFile(fileName)
+
+    Begin
+        Create dataList as empty list
+
+        Open file fileName in read mode
+
+        While not end of file
+            Read line
+            Add line to dataList
+        End While
+
+        Close file
+
+        Return dataList
+    End
+
+
+03.
+
+Function ValidateInput(input)
+
+    Begin
+        If input is empty Then
+            Return False
+        End If
+
+        Return True
+    End
+
+
+04.
+
+Function CheckAvailableTime(doctor, date, time)
+
+    Begin
+        For each appointment in doctor.schedule
+            If appointment.date == date AND appointment.time == time Then
+                Return False
+            End If
+        End For
+
+        Return True
+    End
+
+
+
+🔁 System Function instructions and tips :
+
+01.   SaveDataToFile()
+حفظ البيانات (Patients / Doctors / Appointments) في ملف خارجي لضمان عدم فقدانها بعد غلق البرنامج.
+
+02.   LoadDataFromFile()
+تحميل البيانات من الملف عند تشغيل البرنامج لاسترجاع الحالة السابقة للنظام.
+
+03.   ValidateInput()
+التحقق من صحة المدخلات (فاضية، أرقام بدل نص، فورمات غلط…).
+
+04.   CheckAvailableTime()
+التأكد إن الميعاد المختار متاح ومش محجوز قبل كده..
+

@@ -1,0 +1,209 @@
+Function AdminFlow()
+
+    Begin
+        Set appointmentsList = ViewAllAppointments()
+
+        While True
+
+            Display "1. View Appointments"
+            Display "2. Filter Appointments"
+            Display "3. Add Doctor"
+            Display "4. Edit Doctor"
+            Display "5. Delete Doctor"
+            Display "6. View Doctors By Specialty"
+            Display "7. Statistics"
+            Display "8. Logout"
+
+            Input choice
+
+            If choice == 1 Then
+                For each appointment in appointmentsList
+                    Set data = appointment.GetAppointmentData()
+                    Call DisplayAppointmentDetails(data)
+                End For
+            End If
+
+            If choice == 2 Then
+                Input status
+                Set filtered = FilterAppointments(appointmentsList, status)
+
+                For each appointment in filtered
+                    Set data = appointment.GetAppointmentData()
+                    Call DisplayAppointmentDetails(data)
+                End For
+            End If
+
+            If choice == 3 Then
+                Input name, specialty, phoneNumber, password
+                Call AddDoctor(name, specialty, phoneNumber, password)
+            End If
+
+            If choice == 4 Then
+                Input doctorID, newName, newSpecialty, newPhone
+                Call EditDoctor(doctorID, newName, newSpecialty, newPhone)
+            End If
+
+            If choice == 5 Then
+                Input doctorID
+                Set confirm = ConfirmDeleteDoctor()
+
+                If confirm == True Then
+                    Call DeleteDoctor(doctorID)
+                End If
+            End If
+
+            If choice == 6 Then
+                Input specialty
+                Set doctors = ViewDoctorsBySpecialty(specialty)
+
+                For each doctor in doctors
+                    Display doctor
+                End For
+            End If
+
+            If choice == 7 Then
+                Call RefreshStatistics()
+            End If
+
+            If choice == 8 Then
+                Call Logout()
+                Exit Loop
+            End If
+
+        End While
+    End
+
+
+Function ViewAllAppointments()
+
+    Begin
+        Set appointmentsList = Appointment.ViewAllAppointments()
+        Return appointmentsList
+    End
+
+
+Function DisplayAppointmentDetails(appointmentData)
+
+    Begin
+        Display "Appointment ID: " + appointmentData.ID
+        Display "Patient ID: " + appointmentData.PatientID
+        Display "Doctor ID: " + appointmentData.DoctorID
+        Display "Date: " + appointmentData.Date
+        Display "Time: " + appointmentData.Time
+        Display "Status: " + appointmentData.Status
+        Display "Diagnosis: " + appointmentData.Diagnosis
+    End
+
+
+Function FilterAppointments(appointmentsList, status)
+
+    Begin
+        Create filteredList as empty list
+
+        For each appointment in appointmentsList
+            If appointment.status == status Then
+                Add appointment to filteredList
+            End If
+        End For
+
+        Return filteredList
+    End
+
+
+Function AddDoctor(name, specialty, phoneNumber, password)
+
+    Begin
+        If ValidateDoctorData(name, specialty, phoneNumber, password) == False Then
+            Display "Invalid Doctor Data"
+            Exit Function
+        End If
+
+        Set doctor = CreateDoctor(name, specialty, phoneNumber, password)
+
+        Add doctor to doctorsCollection
+
+        Return doctor
+    End
+
+
+Function EditDoctor(doctorID, newName, newSpecialty, newPhone)
+
+    Begin
+        For each doctor in doctorsCollection
+            If doctor.doctorID == doctorID Then
+                Set doctor.name = newName
+                Set doctor.specialty = newSpecialty
+                Set doctor.phoneNumber = newPhone
+
+                Return doctor
+            End If
+        End For
+
+        Return "Doctor Not Found"
+    End
+
+
+Function DeleteDoctor(doctorID)
+
+    Begin
+        For each doctor in doctorsCollection
+            If doctor.doctorID == doctorID Then
+                Remove doctor from doctorsCollection
+                Return "Doctor Deleted"
+            End If
+        End For
+
+        Return "Doctor Not Found"
+    End
+
+
+Function ConfirmDeleteDoctor()
+
+    Begin
+        Display "Are you sure you want to delete this doctor? (Yes/No)"
+        Input response
+
+        If response == "Yes" Then
+            Return True
+        Else
+            Return False
+        End If
+    End
+
+
+Function ViewDoctorsBySpecialty(specialty)
+
+    Begin
+        Create doctorsList as empty list
+
+        For each doctor in doctorsCollection
+            If doctor.specialty == specialty Then
+                Add doctor.GetDoctorData() to doctorsList
+            End If
+        End For
+
+        Return doctorsList
+    End
+
+
+Function RefreshStatistics()
+
+    Begin
+        Set doctorsCount = CountDoctors()
+        Set appointmentsCount = CountAppointments()
+        Set specialtiesCount = CountSpecialties()
+
+        Display doctorsCount
+        Display appointmentsCount
+        Display specialtiesCount
+    End
+
+
+Function Logout()
+
+    Begin
+        Set currentAdmin = null
+
+        Open HomePage
+        Close AdminPage
+    End

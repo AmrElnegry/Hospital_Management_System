@@ -1,0 +1,125 @@
+🧩 CORE CLASSES
+
+Class: Patient
+
+* CreatePatient()
+  إنشاء مريض جديد وتسجيل بياناته داخل النظام.
+
+* GeneratePatientID()
+  توليد رقم تعريفي فريد لكل مريض.
+
+* GetPatientData()
+  استرجاع بيانات المريض لاستخدامها في العرض أو العمليات.
+
+Class: Doctor
+
+* CreateDoctor()
+  إضافة دكتور جديد ببياناته (اسم، تخصص، مواعيد…).
+
+* GenerateDoctorID()
+  إنشاء ID فريد لكل دكتور.
+
+* GetDoctorData()
+  جلب بيانات الدكتور.
+
+* GetDoctorSchedule()
+  عرض جدول المواعيد الخاصة بالدكتور.
+
+* ValidateDoctorCredentials()
+  التحقق من بيانات تسجيل دخول الدكتور.
+
+Class: Appointment
+
+* CreateAppointment()
+  إنشاء موعد جديد بين مريض ودكتور.
+
+* GenerateAppointmentID()
+  توليد رقم تعريفي فريد لكل موعد.
+
+* LinkPatientToDoctor()
+  ربط المريض بالدكتور داخل الموعد.
+
+* SetAppointmentStatus()
+  تحديد حالة الموعد (Pending / Completed / Cancelled).
+
+* AddDiagnosis()
+  إضافة التشخيص المرتبط بالموعد.
+
+* GetAppointmentData()
+  استرجاع بيانات الموعد.
+
+
+🛠️ ADMIN
+
+🔐 Admin Login
+
+* EnterAdminUsername()
+  إدخال اسم المستخدم.
+
+* EnterAdminPassword()
+  إدخال كلمة المرور.
+
+* ValidateAdminLogin()
+  التحقق من صحة تسجيل الدخول.
+
+* CheckAdminCredentials()
+  مقارنة البيانات مع المخزن.
+
+* ShowLoginError()
+  عرض رسالة خطأ.
+
+* NavigateToAdminPage()
+  الدخول للوحة الأدمن.
+
+🧑‍💼 Admin Page
+
+🔹 Appointments Management
+
+* ViewAllAppointments()
+  عرض كل المواعيد.
+
+* FilterAppointments()
+  تصفية المواعيد.
+
+* DisplayAppointmentDetails()
+  عرض تفاصيل موعد.
+
+🔹 Doctor Management
+
+* AddDoctor()
+  إضافة دكتور.
+
+* ValidateDoctorData()
+  التحقق من البيانات.
+
+* EditDoctor()
+  تعديل دكتور.
+
+* DeleteDoctor()
+  حذف دكتور.
+
+* ConfirmDeleteDoctor()
+  تأكيد الحذف.
+
+* ViewDoctorsBySpecialty()
+  عرض حسب التخصص.
+
+🔹 Statistics
+
+* CountDoctors()
+  حساب عدد الأطباء.
+
+* CountAppointments()
+  حساب عدد المواعيد.
+
+* CountSpecialties()
+  حساب عدد التخصصات.
+
+* RefreshStatistics()
+  تحديث الإحصائيات.
+
+🔹 Session
+
+* Logout()
+  تسجيل الخروج.
+

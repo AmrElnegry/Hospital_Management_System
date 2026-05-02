@@ -1,0 +1,107 @@
+🧩 CORE CLASSES
+
+Class: Patient
+
+* CreatePatient()
+  إنشاء مريض جديد وتسجيل بياناته داخل النظام.
+
+* GeneratePatientID()
+  توليد رقم تعريفي فريد لكل مريض.
+
+* GetPatientData()
+  استرجاع بيانات المريض لاستخدامها في العرض أو العمليات.
+
+Class: Doctor
+
+* CreateDoctor()
+  إضافة دكتور جديد ببياناته (اسم، تخصص، مواعيد…).
+
+* GenerateDoctorID()
+  إنشاء ID فريد لكل دكتور.
+
+* GetDoctorData()
+  جلب بيانات الدكتور.
+
+* GetDoctorSchedule()
+  عرض جدول المواعيد الخاصة بالدكتور.
+
+* ValidateDoctorCredentials()
+  التحقق من بيانات تسجيل دخول الدكتور.
+
+Class: Appointment
+
+* CreateAppointment()
+  إنشاء موعد جديد بين مريض ودكتور.
+
+* GenerateAppointmentID()
+  توليد رقم تعريفي فريد لكل موعد.
+
+* LinkPatientToDoctor()
+  ربط المريض بالدكتور داخل الموعد.
+
+* SetAppointmentStatus()
+  تحديد حالة الموعد (Pending / Completed / Cancelled).
+
+* AddDiagnosis()
+  إضافة التشخيص المرتبط بالموعد.
+
+* GetAppointmentData()
+  استرجاع بيانات الموعد.
+
+
+👤 PATIENT PAGE
+
+🔹 Search System
+
+* SearchPatientByID()
+  البحث باستخدام ID.
+
+* SearchPatientByName()
+  البحث بالاسم.
+
+* DisplayPatientData()
+  عرض بيانات المريض.
+
+* ShowDiagnosis()
+  عرض التشخيصات.
+
+🔹 Booking System
+
+* StartBookingProcess()
+  بدء الحجز.
+
+* InputPatientData()
+  إدخال البيانات.
+
+* ValidatePatientData()
+  التحقق من البيانات.
+
+* CheckExistingPatient()
+  التأكد من وجود المريض.
+
+* SelectSpecialty()
+  اختيار التخصص.
+
+* GetDoctorsBySpecialty()
+  عرض الأطباء.
+
+* SelectDoctor()
+  اختيار دكتور.
+
+* GetAvailableTimeSlots()
+  عرض المواعيد.
+
+* SelectTimeSlot()
+  اختيار ميعاد.
+
+🔹 Confirmation
+
+* ConfirmBooking()
+  تأكيد الحجز.
+
+* ShowConfirmationMessage()
+  عرض رسالة نجاح.
+
+* ClearForm()
+  مسح البيانات.
+

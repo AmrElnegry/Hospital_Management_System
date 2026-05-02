@@ -1,0 +1,88 @@
+Function PatientSystemFlow()
+
+    Begin
+        While True
+
+            Display "1. Search Patient By ID"
+            Display "2. Search Patient By Name"
+            Display "3. Book Appointment"
+            Display "4. Exit"
+
+            Input choice
+
+
+            // ===== Search By ID =====
+            If choice == 1 Then
+                Input patientID
+
+                Set result = SearchPatientByID(patientID)
+
+                If result == "Patient Not Found" Then
+                    Display result
+                Else
+                    Call DisplayPatientData(result)
+                End If
+            End If
+
+
+            // ===== Search By Name =====
+            If choice == 2 Then
+                Input name
+
+                Set results = SearchPatientByName(name)
+
+                If results == "No Patients Found" Then
+                    Display results
+                Else
+                    For each patientData in results
+                        Call DisplayPatientData(patientData)
+                    End For
+                End If
+            End If
+
+
+            // ===== Booking System =====
+            If choice == 3 Then
+
+                // Start Booking
+                Call InputPatientData()
+
+                If ValidatePatientData(name, age, gender, phoneNumber) == False Then
+                    Display "Invalid Patient Data"
+                    Continue Loop
+                End If
+
+                Set patient = CheckExistingPatient(name, phoneNumber)
+
+                If patient is null Then
+                    Set patient = CreatePatient(name, age, gender, phoneNumber)
+                End If
+
+                Set selectedSpecialty = SelectSpecialty()
+
+                Set doctorsList = GetDoctorsBySpecialty(selectedSpecialty)
+
+                Set selectedDoctor = SelectDoctor(doctorsList)
+
+                Set timeSlots = GetAvailableTimeSlots(selectedDoctor)
+
+                Set selectedTimeSlot = SelectTimeSlot(timeSlots)
+
+
+                // Confirm Booking
+                Set appointment = ConfirmBooking(patient, selectedDoctor, date, selectedTimeSlot)
+
+                Call ShowConfirmationMessage(appointment)
+
+                Call ClearForm()
+            End If
+
+
+            // ===== Exit =====
+            If choice == 4 Then
+                Exit Loop
+            End If
+
+        End While
+
+    End
